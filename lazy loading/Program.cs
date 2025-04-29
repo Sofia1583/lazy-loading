@@ -23,4 +23,17 @@ using (ApplicationContext db = new ApplicationContext())
     var users = db.Users.ToList();
     foreach (User user in users)
         Console.WriteLine($"{user.Name} - {user.Company?.Name}");
+    Console.WriteLine("----------------------");
+}
+//можно загрузить компании и связанных с ними пользователей
+using (ApplicationContext db = new ApplicationContext())
+{
+    var companies = db.Companies.ToList();
+    foreach (Company company in companies)
+    {
+        Console.Write($"{company.Name}:");
+        foreach (User user in company.Users)
+            Console.Write($"{user.Name} ");
+        Console.WriteLine();
+    }
 }
